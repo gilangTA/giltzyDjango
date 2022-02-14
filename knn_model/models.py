@@ -25,6 +25,7 @@ class Message(models.Model):
 class Statistic(models.Model):
     id_statistic = models.AutoField(primary_key=True)
     id_user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    hero_name = models.CharField(max_length=200)
     winrate = models.IntegerField(null=False)
    
     def __str__(self):

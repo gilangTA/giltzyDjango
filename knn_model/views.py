@@ -182,6 +182,7 @@ def crud_message(request):
 
         message = Message()
         message.id_user = User_message
+        
         message.message = request.data['message']
         message.save()
         
@@ -209,6 +210,7 @@ def crud_statistic(request):
     elif request.method == 'POST':
         statistic = Statistic()
         statistic.id_user = User_statistic
+        statistic.hero_name = request.data['hero_name']
         statistic.winrate = request.data['winrate']
         statistic.save()
         

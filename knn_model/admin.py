@@ -16,8 +16,8 @@ class MessageUser(admin.ModelAdmin):
     search_fields = ['id_message', 'id_user', 'message']
 
 class StatisticWinrate(admin.ModelAdmin):
-    list_display = ['id_statistic', 'id_user', 'winrate']
-    search_fields = ['id_statistic', 'id_user', 'winrate']
+    list_display = ['id_statistic','hero_name', 'id_user', 'winrate']
+    search_fields = ['id_statistic','hero_name', 'id_user', 'winrate']
 
 # admin.site.register(User, UserApp)
 

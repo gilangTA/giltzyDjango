@@ -13,6 +13,7 @@ from django.contrib.auth import authenticate
 import joblib
 import numpy as np
 import pandas as pd
+import scipy.stats as stats
 
 dataset = pd.read_csv('dataset.csv')
 
@@ -34,13 +35,18 @@ def knn_result(request):
 
             test_data = train_data.append(test_data, ignore_index=True)
 
-            newMax = 1
-            newMin = 0
+            # newMax = 1
+            # newMin = 0
             
-            test_data['Hero Damage'] = (test_data['Hero Damage'].astype(float) - test_data['Hero Damage'].astype(float).min()) * (newMax - newMin)  / (test_data['Hero Damage'].astype(float).max() - test_data['Hero Damage'].astype(float).min()) + newMin
-            test_data["Damage Taken"] = (test_data["Damage Taken"].astype(float) - test_data["Damage Taken"].astype(float).min()) * (newMax - newMin)  / (test_data["Damage Taken"].astype(float).max() - test_data["Damage Taken"].astype(float).min()) + newMin
-            test_data["Teamfight Participation"] = (test_data["Teamfight Participation"].astype(float) - test_data["Teamfight Participation"].astype(float).min()) * (newMax - newMin)  / (test_data["Teamfight Participation"].astype(float).max() - test_data["Teamfight Participation"].astype(float).min()) + newMin
-            test_data["Turret Damage"] = (test_data["Turret Damage"].astype(float) - test_data["Turret Damage"].astype(float).min()) * (newMax - newMin)  / (test_data["Turret Damage"].astype(float).max() - test_data["Turret Damage"].astype(float).min()) + newMin
+            # test_data['Hero Damage'] = (test_data['Hero Damage'].astype(float) - test_data['Hero Damage'].astype(float).min()) * (newMax - newMin)  / (test_data['Hero Damage'].astype(float).max() - test_data['Hero Damage'].astype(float).min()) + newMin
+            # test_data["Damage Taken"] = (test_data["Damage Taken"].astype(float) - test_data["Damage Taken"].astype(float).min()) * (newMax - newMin)  / (test_data["Damage Taken"].astype(float).max() - test_data["Damage Taken"].astype(float).min()) + newMin
+            # test_data["Teamfight Participation"] = (test_data["Teamfight Participation"].astype(float) - test_data["Teamfight Participation"].astype(float).min()) * (newMax - newMin)  / (test_data["Teamfight Participation"].astype(float).max() - test_data["Teamfight Participation"].astype(float).min()) + newMin
+            # test_data["Turret Damage"] = (test_data["Turret Damage"].astype(float) - test_data["Turret Damage"].astype(float).min()) * (newMax - newMin)  / (test_data["Turret Damage"].astype(float).max() - test_data["Turret Damage"].astype(float).min()) + newMin
+
+            test_data["Hero Damage"] = stats.zscore(test_data["Hero Damage"])
+            test_data["Damage Taken"] = stats.zscore(test_data["Damage Taken"])
+            test_data["Teamfight Participation"] = stats.zscore(test_data["Teamfight Participation"])
+            test_data["Turret Damage"] = stats.zscore(test_data["Turret Damage"])
 
             test_data = test_data.tail(1)
             

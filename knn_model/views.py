@@ -43,10 +43,10 @@ def knn_result(request):
             # test_data["Teamfight Participation"] = (test_data["Teamfight Participation"].astype(float) - test_data["Teamfight Participation"].astype(float).min()) * (newMax - newMin)  / (test_data["Teamfight Participation"].astype(float).max() - test_data["Teamfight Participation"].astype(float).min()) + newMin
             # test_data["Turret Damage"] = (test_data["Turret Damage"].astype(float) - test_data["Turret Damage"].astype(float).min()) * (newMax - newMin)  / (test_data["Turret Damage"].astype(float).max() - test_data["Turret Damage"].astype(float).min()) + newMin
 
-            test_data["Hero Damage"] = stats.zscore(test_data["Hero Damage"])
-            test_data["Damage Taken"] = stats.zscore(test_data["Damage Taken"])
-            test_data["Teamfight Participation"] = stats.zscore(test_data["Teamfight Participation"])
-            test_data["Turret Damage"] = stats.zscore(test_data["Turret Damage"])
+            test_data["Hero Damage"] = stats.zscore(test_data["Hero Damage"].astype(float))
+            test_data["Damage Taken"] = stats.zscore(test_data["Damage Taken"].astype(float))
+            test_data["Teamfight Participation"] = stats.zscore(test_data["Teamfight Participation"].astype(float))
+            test_data["Turret Damage"] = stats.zscore(test_data["Turret Damage"].astype(float))
 
             test_data = test_data.tail(1)
             
